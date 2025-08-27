@@ -1,86 +1,92 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../../AppContext';
+// src/components/home/HeroSection.jsx
 
-// ক্লায়েন্টদের ডেটা
-const clients = [
-  {
-    name: 'Momor Lisa',
-    role: 'CEO',
-    image: 'https://images.unsplash.com/photo-1550525811-e5869dd03032?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-  },
-  {
-    name: 'Walter Rhoddy',
-    role: 'CEO',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-  },
-  {
-    name: 'James Mid',
-    role: 'Project Manager',
-    image: 'https://i.ibb.co.com/VpgNqZgp/images-9.jpg'
-  },
-];
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { Code, AppWindow, PencilRuler, ArrowRight } from 'lucide-react';
 
 const HeroSection = () => {
-  const { setIsCalendlyOpen, setIsProfilePopupOpen } = useContext(AppContext);
-
   return (
-    <section className="bg-white py-24 sm:py-32">
-      <div className="container mx-auto px-4 text-center">
-        
-        {/* --- নতুন ইন্টারঅ্যাক্টিভ ক্লায়েন্ট সেকশন --- */}
-        <div className="relative flex justify-center items-center gap-4 mb-6">
-          <div className="flex -space-x-4">
-            {clients.map((client, index) => (
-              <div key={index} className="relative group">
-                <img 
-                  className="inline-block h-12 w-12 rounded-full ring-2 ring-white" 
-                  src={client.image} 
-                  alt={client.name} 
-                />
-                {/* Tooltip */}
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-4 py-2 bg-black text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
-                  <p className="font-bold">{client.name}</p>
-                  <p>{client.role}</p>
-                  <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-x-8 border-x-transparent border-t-8 border-t-black"></div>
+    // --- মূল সেকশন কন্টেইনার ---
+    <section className="relative h-screen min-h-[700px] flex flex-col justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-red-900 text-white overflow-hidden">
+      
+      {/* --- ডেকোরেটিভ শেপ --- */}
+      <div className="absolute top-0 left-0 w-full h-full opacity-10">
+        <div className="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-red-500 rounded-full filter blur-3xl"></div>
+        <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-white rounded-full filter blur-3xl"></div>
+      </div>
+      
+      {/* --- সমাধান: মূল কনটেন্ট এবং নিচের সেকশন আলাদা করা হয়েছে --- */}
+      <div className="w-full flex-grow flex flex-col justify-center items-center">
+        {/* --- উপরের কনটেন্ট (শিরোনাম, বাটন ইত্যাদি) --- */}
+        <div className="relative z-10 container mx-auto px-4 text-center animate-fade-in-up">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight drop-shadow-lg">
+              Creative Solutions, 
+              <br />
+              <span className="text-red-400 typing-animation">Measurable Results.</span>
+            </h1>
+            <p className="mt-6 text-base sm:text-lg text-gray-200 max-w-3xl mx-auto drop-shadow-md">
+              Tecnigo Team is a full-service digital agency crafting beautiful, high-performing websites and applications that drive business growth.
+            </p>
+            
+            <div className="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
+              <NavLink 
+                to="/projects"
+                className="bg-red-600 text-white font-semibold px-8 py-3.5 rounded-full hover:bg-red-700 transition duration-300 transform hover:scale-105 w-full sm:w-auto text-base"
+              >
+                Explore Our Work
+              </NavLink>
+              <NavLink 
+                to="/contact"
+                className="border-2 border-white/80 text-white font-semibold px-8 py-3.5 rounded-full hover:bg-white/10 transition duration-300 w-full sm:w-auto text-base"
+              >
+                Get a Free Quote
+              </NavLink>
+            </div>
+        </div>
+      </div>
+      
+      {/* --- হিরোর নিচের বুলেট পোর্টফোলিও সেকশন --- */}
+      <div className="relative z-10 w-full p-4 bg-black/30 backdrop-blur-sm">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+            
+            <NavLink to="/services/web-development" className="block p-3 rounded-lg hover:bg-white/10 transition-colors">
+              <div className="flex items-center gap-3">
+                <Code className="w-8 h-8 text-red-400 flex-shrink-0" />
+                <div>
+                  <h3 className="font-bold">Web Development</h3>
+                  <p className="text-sm text-gray-300">Custom & Scalable Sites</p>
                 </div>
               </div>
-            ))}
-            <div className="relative group flex items-center justify-center h-12 w-12 rounded-full ring-2 ring-white bg-gray-700 text-white text-sm font-bold">
-              +99
-              {/* Tooltip for +99 */}
-              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-4 py-2 bg-black text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                Have more +99 satisfied clients
-                <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-x-8 border-x-transparent border-t-8 border-t-black"></div>
+            </NavLink>
+
+            <NavLink to="/services/mobile-app-development" className="block p-3 rounded-lg hover:bg-white/10 transition-colors">
+              <div className="flex items-center gap-3">
+                <AppWindow className="w-8 h-8 text-red-400 flex-shrink-0" />
+                <div>
+                  <h3 className="font-bold">App Development</h3>
+                  <p className="text-sm text-gray-300">iOS, Android & Hybrid</p>
+                </div>
               </div>
-            </div>
+            </NavLink>
+
+            <NavLink to="/services/ui-ux-design" className="block p-3 rounded-lg hover:bg-white/10 transition-colors">
+              <div className="flex items-center gap-3">
+                <PencilRuler className="w-8 h-8 text-red-400 flex-shrink-0" />
+                <div>
+                  <h3 className="font-bold">UI/UX Design</h3>
+                  <p className="text-sm text-gray-300">Engaging User Experiences</p>
+                </div>
+              </div>
+            </NavLink>
+
+            <NavLink to="/services/web-development" className="flex items-center justify-center p-3 rounded-lg hover:bg-white/10 transition-colors">
+               <div className="flex items-center gap-2 font-semibold">
+                  View All Services <ArrowRight className="w-5 h-5" />
+               </div>
+            </NavLink>
+
           </div>
-          <p className="text-base font-medium text-gray-700">100+ Satisfied Clients</p>
-        </div>
-
-        {/* মূল হেডিং */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight">
-          Top Software Company in <br /> Bangladesh for Brands
-        </h1>
-
-        {/* সাব-হেডিং */}
-        <p className="mt-6 text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">
-          From strategy to execution, we help brands thrive. Partner with the Top Software Company in Bangladesh — your guide to innovation, growth, and lasting success.
-        </p>
-        
-        {/* বাটন */}
-        <div className="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
-          <button 
-            onClick={() => setIsCalendlyOpen(true)}
-            className="bg-blue-600 text-white font-semibold px-8 py-3.5 rounded-full hover:bg-blue-700 transition duration-300 transform hover:scale-105 w-full sm:w-auto text-base"
-          >
-            Book an appointment
-          </button>
-          <button 
-            onClick={() => setIsProfilePopupOpen(true)}
-            className="border-2 border-gray-300 text-gray-800 font-semibold px-8 py-3.5 rounded-full hover:bg-gray-100 hover:border-gray-400 transition duration-300 w-full sm:w-auto text-base"
-          >
-            See Company Profile
-          </button>
         </div>
       </div>
     </section>

@@ -1,4 +1,5 @@
 // src/components/common/ContactPopup.jsx
+
 import React, { useState } from 'react';
 import { FiX } from 'react-icons/fi';
 
@@ -6,7 +7,7 @@ const ContactPopup = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
 
     const [activeService, setActiveService] = useState('Hire Staff');
-    const services = ['Hire Staff', 'Software Development', 'Mobile Application', 'Experience Design'];
+    const services = ['Hire Staff', 'Software Development', 'Mobile Application', 'UI/UX Design'];
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -45,7 +46,7 @@ const ContactPopup = ({ isOpen, onClose }) => {
                         How can we help you?
                     </h2>
                     <p className="mt-4 text-gray-600">
-                        You can reach us anytime via <a href="mailto:business@zaagsys.com" className="font-semibold text-blue-600 hover:underline">business@zaagsys.com</a>
+                        You can reach us anytime via <a href="mailto:contact@tecnigoteam.com" className="font-semibold text-red-600 hover:underline">contact@tecnigoteam.com</a>
                     </p>
 
                     <form onSubmit={handleSubmit} className="mt-10 space-y-6">
@@ -58,7 +59,7 @@ const ContactPopup = ({ isOpen, onClose }) => {
                                         onClick={() => setActiveService(service)}
                                         className={`px-5 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 ${
                                             activeService === service 
-                                            ? 'bg-blue-600 text-white shadow-lg' 
+                                            ? 'bg-red-600 text-white shadow-lg' 
                                             : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-100'
                                         }`}
                                     >
@@ -70,27 +71,27 @@ const ContactPopup = ({ isOpen, onClose }) => {
                         
                         <div>
                             <label htmlFor="popup-name" className="block text-sm font-semibold text-gray-700 mb-2">Name <span className="text-red-500">*</span></label>
-                            <input type="text" id="popup-name" placeholder="Write your name" required className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            <input type="text" id="popup-name" placeholder="Write your name" required className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500" />
                         </div>
                         <div>
                             <label htmlFor="popup-email" className="block text-sm font-semibold text-gray-700 mb-2">Email <span className="text-red-500">*</span></label>
-                            <input type="email" id="popup-email" placeholder="Write your email" required className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            <input type="email" id="popup-email" placeholder="Write your email" required className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500" />
                         </div>
                         <div>
                             <label htmlFor="popup-phone" className="block text-sm font-semibold text-gray-700 mb-2">Phone Number <span className="text-red-500">*</span></label>
                             <div className="flex">
-                                <select className="px-4 py-3 border border-r-0 border-gray-300 rounded-l-lg bg-gray-50 focus:outline-none">
+                                <select className="px-4 py-3 border border-r-0 border-gray-300 rounded-l-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500">
                                     <option>BD +880</option><option>US +1</option><option>UK +44</option>
                                 </select>
-                                <input type="tel" id="popup-phone" placeholder="Write your number" required className="block w-full px-4 py-3 border border-gray-300 rounded-r-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                <input type="tel" id="popup-phone" placeholder="Write your number" required className="block w-full px-4 py-3 border border-gray-300 rounded-r-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500" />
                             </div>
                         </div>
                         <div>
                             <label htmlFor="popup-message" className="block text-sm font-semibold text-gray-700 mb-2">How can we help you? <span className="text-red-500">*</span></label>
-                            <textarea id="popup-message" rows="4" placeholder="Start typing here" required className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            <textarea id="popup-message" rows="4" placeholder="Start typing here" required className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500" />
                         </div>
                         <div>
-                            <button type="submit" className="w-full bg-blue-600 text-white font-bold px-8 py-4 rounded-full hover:bg-blue-700 transition-transform duration-300 transform hover:scale-105">
+                            <button type="submit" className="w-full bg-red-600 text-white font-bold px-8 py-4 rounded-full hover:bg-red-700 transition-transform duration-300 transform hover:scale-105">
                                 Submit & Schedule Meeting
                             </button>
                         </div>

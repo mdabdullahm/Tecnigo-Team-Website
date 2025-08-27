@@ -1,100 +1,140 @@
 // src/pages/Projects.jsx
 
-import React from 'react';
+import React, { useState, useMemo, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { AppContext } from '../AppContext';
+import { ArrowUpRight } from 'lucide-react';
 
-// প্রজেক্টের ডেটা
-const projectsData = [
+// --- প্রজেক্টের ডেটা (এখানে আপনার সেরা প্রজেক্টগুলো যোগ করুন) ---
+const allProjects = [
     {
-        image: 'https://cdn.dribbble.com/userupload/4156291/file/original-1913b86032717019f6a6552a92a548ed.png?resize=752x564',
-        category: 'Fintech | Personal Finance Management',
-        title: 'Paytro: Smarter Financial Choices for a Brighter Future',
+        image: 'https://images.pexels.com/photos/4145153/pexels-photo-4145153.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        category: 'UI/UX Design',
+        title: 'Fintech Mobile Application',
+        description: 'A revolutionary mobile banking app designed to simplify personal finance management.'
     },
     {
-        image: 'https://cdn.dribbble.com/userupload/11261313/file/original-0994f7933b49f48a90a7751f75000527.png?resize=752x564',
-        category: 'Vehicle management',
-        title: 'Fleet Hub: Streamlined Vehicle & Workforce Management',
+        image: 'https://images.pexels.com/photos/6476587/pexels-photo-6476587.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        category: 'Web Development',
+        title: 'E-commerce Platform Redesign',
+        description: 'A scalable e-commerce site that boosted client sales by over 300%.'
     },
     {
-        image: 'https://cdn.dribbble.com/userupload/3909160/file/original-c17c27189f3a693c1042125555ac912b.png?resize=752x564',
-        category: 'Healthcare',
-        title: 'IntelliHealth: AI-Powered Health Consultations',
+        image: 'https://images.pexels.com/photos/5926382/pexels-photo-5926382.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        category: 'Product Design',
+        title: 'SaaS Analytical Dashboard',
+        description: 'An intuitive dashboard providing users with powerful data visualization and insights.'
     },
     {
-        image: 'https://cdn.dribbble.com/userupload/7342686/file/original-d6a917548f2191b72a4d33a1f81014a6.png?resize=752x564',
-        category: 'Fuel management',
-        title: 'Fuel Pro: Revolutionizing Fuel Management for Efficiency',
+        image: 'https://images.pexels.com/photos/39284/macbook-apple-imac-computer-39284.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        category: 'Web Development',
+        title: 'Corporate Website for Tech Corp',
+        description: 'A complete overhaul resulting in a 150% increase in user engagement.'
     },
     {
-        image: 'https://cdn.dribbble.com/userupload/9589312/file/original-7b8c80a2b848ccefb7f99997c63102f9.png?resize=752x564',
-        category: 'Project management',
-        title: 'Pixel Pulse: Elevating Digital Agency Efficiency',
+        image: 'https://images.pexels.com/photos/1749303/pexels-photo-1749303.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        category: 'App Development',
+        title: 'Fleet Management Mobile App',
+        description: 'Seamless vehicle and workforce management with real-time tracking.'
     },
     {
-        image: 'https://cdn.dribbble.com/users/1615584/screenshots/11385311/media/df1488c7f53676a394f7d377c8e9d3d3.png?resize=752x564',
-        category: 'Healthcare',
-        title: 'Transforming Health Management with X-Health Hub',
+        image: 'https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        category: 'UI/UX Design',
+        title: 'Creative Agency Portfolio',
+        description: 'A visually stunning portfolio website for a leading creative agency.'
     },
 ];
 
-// Project Card Component
-const ProjectCard = ({ image, category, title }) => (
-    <div className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-        <div className="overflow-hidden">
+const categories = ['All', 'Web Development', 'UI/UX Design', 'App Development', 'Product Design'];
+
+// --- Project Card Component ---
+const ProjectCard = ({ image, category, title, description }) => (
+    <div className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2 border border-gray-100">
+        <div className="overflow-hidden aspect-w-4 aspect-h-3">
             <img 
                 src={image} 
                 alt={title} 
-                className="w-full h-64 object-cover object-top transform group-hover:scale-105 transition-transform duration-300" 
+                className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-500" 
             />
         </div>
         <div className="p-6">
-            <p className="text-sm text-gray-500 mb-2">{category}</p>
+            <p className="text-sm font-semibold text-red-600 mb-2">{category}</p>
             <h3 className="text-xl font-bold text-gray-800 leading-snug">{title}</h3>
+            <p className="text-gray-500 mt-3 text-sm line-clamp-2">{description}</p>
         </div>
     </div>
 );
 
+// --- Main Projects Page Component ---
 const Projects = () => {
+    const { setIsContactPopupOpen } = useContext(AppContext);
+    const [activeCategory, setActiveCategory] = useState('All');
+
+    const filteredProjects = useMemo(() => {
+        if (activeCategory === 'All') return allProjects;
+        return allProjects.filter(project => project.category === activeCategory);
+    }, [activeCategory]);
+
     return (
-        <div>
+        <div className="bg-white">
             {/* --- Hero Section --- */}
-            <section className="relative pt-32 pb-16 bg-gray-800">
-                <img 
-                    src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    alt="Team working in an office"
-                    className="absolute inset-0 w-full h-full object-cover opacity-30"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                <div className="container mx-auto px-4 relative z-10 text-center text-white">
-                    <h1 className="text-4xl md:text-6xl font-extrabold">
-                        See Our Impressive <span className="text-blue-400">Portfolio</span> of Work
-                    </h1>
-                    <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-200">
-                        At ZAAG Systems Limited, we’re proud of the innovative solutions we’ve delivered to our clients in various areas.
+            <section className="bg-gray-900 text-white pt-32 pb-16 text-center">
+                <div className="container mx-auto px-4">
+                    <h1 className="text-4xl md:text-6xl font-extrabold">Our Portfolio</h1>
+                    <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-300">
+                        We take pride in the solutions we've delivered. Explore our portfolio of projects that have driven success for our clients.
                     </p>
-                    <NavLink
-                        to="/contact"
-                        className="mt-8 inline-block bg-blue-600 text-white font-semibold px-8 py-3.5 rounded-full hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
-                    >
-                        Let's Discuss Your Project
-                    </NavLink>
                 </div>
             </section>
 
-            {/* --- Projects Grid Section --- */}
+            {/* --- Projects Grid & Filters Section --- */}
             <section className="bg-gray-50 py-20">
                 <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-                        {projectsData.map((project, index) => (
+                    {/* Category Filters */}
+                    <div className="flex flex-wrap justify-center gap-3 mb-12">
+                        {categories.map(category => (
+                            <button
+                                key={category}
+                                onClick={() => setActiveCategory(category)}
+                                className={`px-5 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 ${
+                                    activeCategory === category 
+                                    ? 'bg-red-600 text-white shadow-md' 
+                                    : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-100 hover:border-gray-300'
+                                }`}
+                            >
+                                {category}
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Projects Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+                        {filteredProjects.map((project, index) => (
                             <ProjectCard 
                                 key={index}
-                                image={project.image}
-                                category={project.category}
-                                title={project.title}
+                                {...project}
                             />
                         ))}
                     </div>
                 </div>
+            </section>
+
+            {/* --- CTA Section --- */}
+            <section className="bg-white py-24">
+                 <div className="container mx-auto px-4">
+                    <div className="bg-gray-900 text-white rounded-2xl p-10 md:p-16 text-center max-w-4xl mx-auto shadow-2xl">
+                        <h2 className="text-3xl md:text-4xl font-bold">Have a similar project in mind?</h2>
+                        <p className="mt-4 text-gray-300 max-w-xl mx-auto">
+                            Let's turn your idea into a reality. We'd love to hear about your project and discuss how we can help.
+                        </p>
+                        <button 
+                            onClick={() => setIsContactPopupOpen(true)}
+                            className="mt-8 inline-flex items-center gap-2 bg-red-600 text-white font-semibold px-8 py-3.5 rounded-full hover:bg-red-700 transition-transform transform hover:scale-105"
+                        >
+                            Let's Talk <ArrowUpRight size={20} />
+                        </button>
+                    </div>
+                 </div>
             </section>
         </div>
     );

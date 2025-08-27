@@ -1,104 +1,127 @@
-import React from 'react';
-import { ArrowUpRight, Copy } from 'lucide-react';
-import ClientLogos from '../components/uiux/ClientLogos';
-// --- ভুল import লাইনটি পরিবর্তন করে সঠিকটি যোগ করা হয়েছে ---
-import LocationSection from '../components/uiux/LocationSection'; 
+// src/pages/ContactPage.jsx
+
+import React, { useState, useContext } from 'react';
+import { AppContext } from '../AppContext';
+import { Mail, Phone, MapPin, Copy, ArrowRight } from 'lucide-react';
+
+// Form Input Component
+const FormInput = ({ label, type = 'text', name, placeholder, required = false }) => (
+    <div>
+        <label htmlFor={name} className="block text-sm font-semibold text-gray-700 mb-2">
+            {label} {required && <span className="text-red-500">*</span>}
+        </label>
+        <input
+            type={type}
+            id={name}
+            name={name}
+            placeholder={placeholder}
+            required={required}
+            className="block w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-colors"
+        />
+    </div>
+);
+
+// Form TextArea Component
+const FormTextarea = ({ label, name, placeholder, required = false }) => (
+    <div>
+        <label htmlFor={name} className="block text-sm font-semibold text-gray-700 mb-2">
+            {label} {required && <span className="text-red-500">*</span>}
+        </label>
+        <textarea
+            id={name}
+            name={name}
+            rows="5"
+            placeholder={placeholder}
+            required={required}
+            className="block w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-colors"
+        />
+    </div>
+);
 
 const ContactPage = () => {
+    const { setIsCalendlyOpen } = useContext(AppContext);
+    
     const copyToClipboard = (text) => {
         navigator.clipboard.writeText(text);
         alert('Email copied to clipboard!');
     };
 
     return (
-        <div className="bg-white">
-            {/* --- Main Contact Section --- */}
-            <section className="py-24">
-                <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-                    {/* Left Side: Text and Info */}
-                    <div className="lg:sticky top-28">
-                        <h1 className="text-4xl md:text-6xl font-bold leading-tight text-gray-800">
-                            Let's start a project <span className="text-gray-300">to<span className='text-red-500'>g</span>ether</span>
-                        </h1>
-                        <ul className="mt-8 space-y-4 text-gray-600">
-                            <li className="flex items-start gap-3"><span className="text-blue-500 mt-1">✦</span><span>Expect a response within 24 hours.</span></li>
-                            <li className="flex items-start gap-3"><span className="text-blue-500 mt-1">✦</span><span>NDA signing available upon request.</span></li>
-                            <li className="flex items-start gap-3"><span className="text-blue-500 mt-1">✦</span><span>A dedicated designer will be assigned to your project.</span></li>
-                            <li className="flex items-start gap-3"><span className="text-blue-500 mt-1">✦</span><span>We'll outline a clear project roadmap for you.</span></li>
-                        </ul>
-                        <h3 className="mt-16 text-3xl font-bold">Book a free schedule strategy call.</h3>
-                        <button className="mt-6 relative inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold border border-gray-300 overflow-hidden group">
-                           <span className="absolute left-0 top-0 w-full h-full bg-blue-600 transform -translate-x-full transition-transform duration-300 group-hover:translate-x-0"></span>
-                           <span className="relative z-10 group-hover:text-white transition-colors duration-300">Schedule 20 minutes call</span>
-                           <ArrowUpRight size={20} className="relative z-10 group-hover:text-white transition-colors duration-300"/>
-                        </button>
+        <section className="bg-white min-h-screen pt-24">
+            <div className="container mx-auto px-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                    
+                    {/* Left Side: Information */}
+                    <div className="lg:sticky top-28 pb-16">
+                        <div className="text-center lg:text-left">
+                            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+                                Let's Create Something Amazing
+                            </h1>
+                            <p className="mt-4 text-lg text-gray-600">
+                                Have an idea? We're here to help you bring it to life. Reach out to us, and let's start the conversation.
+                            </p>
+                        </div>
+                        
+                        <div className="mt-12 space-y-6">
+                            <div className="flex items-center gap-4">
+                                <Mail className="w-8 h-8 text-red-600" />
+                                <div>
+                                    <h3 className="font-semibold text-gray-800">Project Inquiries</h3>
+                                    <button onClick={() => copyToClipboard('hello@tecnigoxd.agency')} className="text-gray-600 hover:text-red-600 flex items-center gap-2">
+                                        hello@tecnigoxd.agency <Copy size={14}/>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <Phone className="w-8 h-8 text-red-600" />
+                                <div>
+                                    <h3 className="font-semibold text-gray-800">Phone</h3>
+                                    <a href="tel:+15551234567" className="text-gray-600 hover:text-red-600">+1 (555) 123-4567</a>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <MapPin className="w-8 h-8 text-red-600" />
+                                <div>
+                                    <h3 className="font-semibold text-gray-800">Our Studio</h3>
+                                    <p className="text-gray-600">123 Design Lane, Creativity City</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="mt-12 pt-8 border-t border-gray-200">
+                             <h3 className="text-xl font-bold text-gray-800">Schedule a Free Strategy Call</h3>
+                             <p className="mt-2 text-gray-600">Book a 30-minute call to discuss your project with our design experts.</p>
+                             <button 
+                                onClick={() => setIsCalendlyOpen(true)}
+                                className="mt-4 flex items-center gap-2 bg-red-600 text-white font-semibold px-6 py-3 rounded-full hover:bg-red-700 transition-colors"
+                             >
+                                Book a Free Call <ArrowRight size={16}/>
+                             </button>
+                        </div>
                     </div>
 
                     {/* Right Side: Form */}
-                    <div className="bg-white p-8 rounded-2xl shadow-2xl border border-gray-100">
+                    <div className="bg-white p-8 rounded-2xl shadow-2xl border border-gray-100 mb-16">
+                        <h2 className="text-2xl font-bold text-gray-800 mb-6">Tell Us About Your Project</h2>
                         <form className="space-y-8">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Full Name*</label>
-                                <input type="text" placeholder="Enter your name" required className="w-full p-4 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Email*</label>
-                                    <input type="email" placeholder="Enter your email" required className="w-full p-4 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Phone (optional)</label>
-                                    <input type="tel" placeholder="Enter your phone" className="w-full p-4 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                                </div>
+                                <FormInput label="First Name" name="first_name" placeholder="John" required />
+                                <FormInput label="Last Name" name="last_name" placeholder="Doe" required />
                             </div>
-                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">How did you hear about us?</label>
-                                    <select className="w-full p-4 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none">
-                                        <option>Google Search</option>
-                                        <option>Social Media</option>
-                                        <option>Referral</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Project budget?</label>
-                                     <select className="w-full p-4 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none">
-                                        <option>$200 - $699</option>
-                                        <option>$1000 - $4999</option>
-                                        <option>$5000+</option>
-                                    </select>
-                                </div>
-                            </div>
+                            <FormInput label="Email" type="email" name="email" placeholder="you@example.com" required />
+                            <FormInput label="Company Website" name="website" placeholder="https://yourcompany.com" />
+                            <FormTextarea label="What can we help you with?" name="message" placeholder="Describe your project, goals, and challenges." required />
+
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">About project*</label>
-                                <textarea placeholder="Describe your project" rows="4" required className="w-full p-4 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                            </div>
-                            <div className="flex flex-col sm:flex-row justify-between items-center pt-4">
-                                <div className="text-center sm:text-left mb-4 sm:mb-0">
-                                    <p className="text-sm text-gray-500">Hate contact forms?</p>
-                                    <button 
-                                        type="button" 
-                                        onClick={() => copyToClipboard('hello@zaagxd.agency')} 
-                                        className="font-semibold text-gray-800 hover:text-blue-600 flex items-center gap-2"
-                                    >
-                                        hello@zaagxd.agency <Copy size={16} />
-                                    </button>
-                                </div>
-                                <button type="submit" className="relative bg-blue-600 text-white px-8 py-3 rounded-full font-semibold overflow-hidden group w-full sm:w-auto">
-                                    <span className="absolute left-0 top-0 w-full h-full bg-black transform -translate-x-full transition-transform duration-300 group-hover:translate-x-0"></span>
-                                    <span className="relative z-10">Submit Now</span>
+                                <button type="submit" className="w-full bg-gray-900 text-white font-bold px-8 py-4 rounded-full hover:bg-black transition-transform duration-300 transform hover:scale-105">
+                                    Send Inquiry
                                 </button>
                             </div>
                         </form>
                     </div>
                 </div>
-            </section>
-            
-            <div className="bg-gray-50 pt-12">
-                <ClientLogos />
-                <LocationSection />
             </div>
-        </div>
+        </section>
     );
 };
 

@@ -1,36 +1,25 @@
 // src/components/home/Faq.jsx
-import React, { useState } from 'react';
+
+import React, { useState, useContext } from 'react'; // <-- useContext ইম্পোর্ট করুন
 import { Plus, Minus } from 'lucide-react';
+import { AppContext } from '../../AppContext'; // <-- AppContext ইম্পোর্ট করুন
 
 const faqData = [
-  {
-    question: 'What services does Zaag Systems offer?',
-    answer: 'We provide custom software development, web and mobile app development, UI/UX design, e-commerce solutions, CMS development, and dedicated developer staffing services for businesses worldwide.'
-  },
-  {
-    question: 'Which industries do you serve?',
-    answer: 'We serve a wide range of industries including healthcare, finance, e-commerce, real estate, education, and more. Our solutions are tailored to meet the specific needs of each industry.'
-  },
-  {
-    question: 'How do you ensure the quality of your projects?',
-    answer: 'We follow a rigorous quality assurance (SQA) process that includes code reviews, automated testing, manual testing, and user acceptance testing (UAT) to ensure the final product is bug-free and meets the highest standards.'
-  },
-  {
-    question: 'How much does it cost to build a website or app?',
-    answer: 'The cost depends on various factors such as the complexity of the project, features required, and the technology stack. We provide a detailed quote after understanding your specific requirements.'
-  },
+    // ... (faqData অপরিবর্তিত) ...
+    {question: 'What types of services does Tecnigo Team offer?', answer: 'We offer a full range of digital services, including custom web development, mobile app development, UI/UX design, and cyber security solutions. We are your one-stop partner for all digital needs.'},{question: 'How do you ensure the quality of your projects?', answer: 'Quality is our top priority. We follow a rigorous process that includes detailed planning, agile development, continuous testing (SQA), and transparent client communication to ensure the final product is of the highest standard.'},{question: 'What is the typical timeline for a project?', answer: 'The timeline varies depending on the project\'s complexity and scope. After our initial discovery call, we provide a detailed project roadmap with clear milestones and deadlines.'},{question: 'How much will my project cost?', answer: 'Project costs are tailored to your specific requirements. We offer a free, no-obligation quote after discussing your needs. Our goal is to provide maximum value for your investment.'},{question: 'Can I see some examples of your previous work?', answer: 'Absolutely! You can explore our featured case studies on our Projects page. We\'d also be happy to share more specific examples relevant to your industry during our call.'},
 ];
 
 const FaqItem = ({ item, isOpen, onClick }) => {
+    // ... (FaqItem কম্পোনেন্ট অপরিবর্তিত) ...
   return (
-    <div className="border-b border-blue-800/50 py-6">
+    <div className="border-b border-gray-200 py-6">
       <button
-        className="w-full flex justify-between items-center text-left"
+        className="w-full flex justify-between items-center text-left gap-4"
         onClick={onClick}
       >
-        <h3 className="text-xl font-medium text-white">{item.question}</h3>
-        <span>
-          {isOpen ? <Minus className="text-white" /> : <Plus className="text-white" />}
+        <h3 className="text-xl font-medium text-gray-800">{item.question}</h3>
+        <span className="text-red-500">
+          {isOpen ? <Minus /> : <Plus />}
         </span>
       </button>
       <div
@@ -38,41 +27,51 @@ const FaqItem = ({ item, isOpen, onClick }) => {
           isOpen ? 'max-h-screen mt-4' : 'max-h-0'
         }`}
       >
-        <p className="text-blue-200 leading-relaxed pr-8">{item.answer}</p>
+        <p className="text-gray-600 leading-relaxed pr-8">{item.answer}</p>
       </div>
     </div>
   );
 };
 
 const Faq = () => {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [openIndex, setOpenIndex] = useState(0);
+  const { setIsContactPopupOpen } = useContext(AppContext); // <-- context থেকে ফাংশনটি নিন
 
   const handleToggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section className="bg-[#001f55] text-white py-24">
+    <section className="bg-white py-24">
       <div className="container mx-auto px-4">
-        {/* Title Section */}
-        <div className="text-center mb-16 max-w-4xl mx-auto">
-          <h2 className="text-4xl lg:text-5xl font-bold">
-            Your Software Development Questions, Answered
-          </h2>
-          <p className="mt-6 text-lg text-blue-200">
-            From strategy to execution, our custom software development services are built to transform your challenges into business advantages.
-          </p>
-        </div>
-
-        {/* New Grid for Image and Accordion */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          {/* Left Side: Image */}
-          <div className="hidden lg:block sticky top-24">
-            <img
-              src="https://images.pexels.com/photos/17798150/pexels-photo-17798150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt="Abstract 3D Glass Art"
-              className="rounded-3xl w-full h-auto object-cover"
-            />
+          
+          {/* Left Side: Image and Title */}
+          <div className="lg:sticky top-24">
+            <div className="text-center lg:text-left mb-8">
+                <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
+                Frequently Asked Questions
+                </h2>
+                <p className="mt-4 text-lg text-gray-600">
+                Have questions? We've got answers. If you can't find what you're looking for, feel free to contact us.
+                </p>
+            </div>
+            <div className="relative aspect-w-4 aspect-h-3">
+              <img
+                src="https://images.pexels.com/photos/3184433/pexels-photo-3184433.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                alt="Team discussing questions"
+                className="rounded-2xl w-full h-full object-cover shadow-xl"
+              />
+            </div>
+            <div className="text-center lg:text-left mt-8">
+                {/* --- NavLink কে button দিয়ে প্রতিস্থাপন করা হয়েছে --- */}
+                <button
+                    onClick={() => setIsContactPopupOpen(true)} // <-- onClick ইভেন্ট যোগ করা হয়েছে
+                    className="inline-block bg-red-600 text-white font-semibold px-8 py-3.5 rounded-full hover:bg-red-700 transition-colors duration-300"
+                >
+                    Ask a Question
+                </button>
+            </div>
           </div>
 
           {/* Right Side: Accordion */}

@@ -1,196 +1,108 @@
 // src/pages/ServiceDesign.jsx
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Scaling, Workflow, PieChart, Recycle, ArrowRight, Quote } from 'lucide-react';
+import { Users, Microscope, Puzzle, Heart, Quote, Gem, CheckCircle } from 'lucide-react';
+import { AppContext } from '../AppContext';
 
-// --- Hero Section (আগের মতোই) ---
-const ServiceDesignHero = () => (
-    <section className="bg-gradient-to-br from-blue-50 via-white to-purple-50 pt-32 pb-20 overflow-hidden">
-        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="text-center md:text-left animate-fade-in-up">
-                <h1 className="text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
-                    Transforming User Experiences through <span className="text-blue-600">Service Design</span>
-                </h1>
-                <p className="mt-6 text-lg text-gray-600 max-w-lg mx-auto md:mx-0">
-                    Unlock the full potential of your business by leveraging the power of Service Design. Our expert team combines creativity, empathy, and strategic thinking to create seamless and meaningful experiences for your customers.
-                </p>
-                <NavLink 
-                    to="/contact"
-                    className="mt-8 inline-block bg-blue-600 text-white font-semibold px-8 py-4 rounded-full hover:bg-blue-700 transition-transform duration-300 transform hover:scale-105"
-                >
-                    Get Started Now
-                </NavLink>
-            </div>
-            <div className="flex justify-center">
-                <img 
-                    src="https://i.ibb.co/N1W7MpH/service-design-hero.png" 
-                    alt="Service Design Process" 
-                    className="max-w-lg w-full"
-                />
-            </div>
-        </div>
-    </section>
-);
+// --- পুনঃব্যবহারযোগ্য কম্পোনেন্টগুলো (আগের পেজগুলো থেকে নেওয়া) ---
 
-// --- "What is Service Design?" Section (আগের মতোই) ---
-const WhatIsServiceDesign = () => (
-    <section className="bg-white py-20">
-        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-                <h2 className="text-3xl font-extrabold text-gray-900 mb-4">What is Service Design?</h2>
-                <div className="w-24 h-1.5 bg-blue-600 rounded-full mb-6"></div>
-                <img src="https://images.pexels.com/photos/3184431/pexels-photo-3184431.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Team mapping a user journey" className="rounded-2xl shadow-lg w-full" />
-            </div>
-            <div className="bg-blue-600 text-white p-10 rounded-2xl">
-                <p className="text-lg leading-relaxed">
-                    Service Design is a comprehensive and customer-centric approach that encompasses the entire service experience. It goes beyond just the visual aspects and delves into understanding customer needs, mapping out touchpoints, and aligning business processes.
-                    <br/><br/>
-                    By taking a holistic view, Service Design helps create exceptional and impactful services that leave a lasting impression on customers. It's all about designing experiences that resonate and meet the needs of users, ensuring their satisfaction and loyalty.
-                </p>
-            </div>
-        </div>
-    </section>
-);
-
-
-// --- Our Approach Section (আগের মতোই) ---
-const OurApproach = () => {
-    const steps = [
-        { number: '1', title: 'Journey Mapping', description: 'Uncover key customer touchpoints, pain points, and opportunities through visualizing the end-to-end user journey. Gain valuable insights to optimize and enhance the customer experience.' },
-        { number: '2', title: 'Service Blueprints', description: 'Create detailed visualizations of your service ecosystem, mapping out the front-stage and back-stage processes to identify areas for improvement and innovation.' },
-        { number: '3', title: 'User-Centered Design', description: 'Place your customers at the heart of your service design process. Through research, empathy, and user testing, we create solutions that truly meet their needs and expectations.' },
-        { number: '4', title: 'Holistic Perspective', description: 'We take a holistic view of your service, considering all touchpoints, channels, and stakeholders to create a cohesive and seamless experience.' },
-        { number: '5', title: 'Prototyping and Testing', description: 'We create interactive prototypes and conduct user testing to validate design concepts, gather feedback, and iterate on solutions before implementation.' },
-    ];
-
+// ServiceHero
+const ServiceHero = ({ title, description, image }) => {
+    const { setIsContactPopupOpen } = useContext(AppContext);
     return (
-        <section className="bg-gray-50 py-24">
-            <div className="container mx-auto px-4">
-                <div className="text-center mb-16 max-w-3xl mx-auto">
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
-                        Exceptional Service Design for Seamless User Experiences
-                    </h2>
-                    <p className="mt-4 text-gray-600">
-                        We specialize in creating exceptional service design solutions that deliver seamless user experiences. Through customer insights, research, and collaborative ideation, we bring your services to life.
-                    </p>
+        <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-black pt-32 pb-20 text-white overflow-hidden">
+            <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div className="text-center md:text-left animate-fade-in-up">
+                    <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight">{title}</h1>
+                    <p className="mt-6 text-lg text-gray-300 max-w-lg mx-auto md:mx-0">{description}</p>
+                    <button onClick={() => setIsContactPopupOpen(true)} className="mt-8 inline-block bg-red-600 text-white font-semibold px-8 py-4 rounded-full hover:bg-red-700 transition-transform duration-300 transform hover:scale-105">
+                        Start Your Project
+                    </button>
                 </div>
-                <div className="space-y-10">
-                    {steps.map(step => (
-                        <div key={step.number} className="p-6 bg-white rounded-lg shadow-sm border-l-4 border-blue-500">
-                            <h3 className="text-2xl font-bold text-gray-800">{`${step.number}. ${step.title}`}</h3>
-                            <p className="mt-3 text-gray-600">{step.description}</p>
-                        </div>
-                    ))}
+                <div className="flex justify-center md:justify-end">
+                    <img src={image} alt={title} className="w-full max-w-lg rounded-lg shadow-2xl" />
                 </div>
             </div>
         </section>
     );
 };
 
-// --- Why Choose Us Section (আগের মতোই) ---
-const ReasonCard = ({ icon, title, description }) => (
+// KeyPrinciples (KeyFeatures এর পরিবর্তিত সংস্করণ)
+const PrincipleCard = ({ icon, title, description }) => (
     <div className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 h-full">
-        <div className="text-blue-600 mb-5">
-            {icon}
-        </div>
+        <div className="inline-block bg-red-50 text-red-600 p-4 rounded-full mb-5">{icon}</div>
         <h3 className="text-xl font-bold text-gray-800 mb-3">{title}</h3>
         <p className="text-gray-600 leading-relaxed">{description}</p>
     </div>
 );
-
-const WhyChooseUs = () => {
-    const reasons = [
-        { icon: <Scaling size={32} />, title: 'Human-Centered Approach', description: 'We prioritize understanding and empathizing with your customers to create services that truly meet their needs and exceed their expectations.' },
-        { icon: <Workflow size={32} />, title: 'Collaborative Process', description: 'We believe in collaboration and actively involve stakeholders and users throughout the Service Design journey.' },
-        { icon: <PieChart size={32} />, title: 'Data-Driven Insights', description: 'Our Service Design approach is grounded in research and data. We leverage user insights and market trends to inform our design decisions.' },
-        { icon: <Recycle size={32} />, title: 'Iterative and Agile', description: 'We follow an iterative and agile process, allowing for continuous improvement and refinement. We embrace feedback to deliver the best possible outcomes.' },
-    ];
-    return (
-        <section className="bg-white py-20">
-            <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
-                <div className="lg:col-span-1">
-                    <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Why Choose Our Service Design Services?</h2>
-                    <div className="w-24 h-1.5 bg-blue-600 rounded-full"></div>
-                    <img src="https://images.pexels.com/photos/3184429/pexels-photo-3184429.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Team collaborating" className="mt-8 rounded-lg shadow-md w-full" />
-                </div>
-                <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {reasons.map((reason, index) => (
-                        <ReasonCard key={index} {...reason} />
-                    ))}
-                </div>
+const KeyPrinciples = ({ title, subtitle, principles = [] }) => (
+    <section className="bg-gray-50 py-20">
+        <div className="container mx-auto px-4">
+            <div className="text-center mb-16 max-w-3xl mx-auto">
+                <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2">{title}</h2>
+                <p className="text-gray-600 mt-4 text-lg">{subtitle}</p>
             </div>
-        </section>
-    );
-};
-
-// --- নতুন: Our Stories Section ---
-const StoryCard = ({ image, category, title, link }) => (
-    <a href={link} className="group block bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-        <div className="overflow-hidden">
-            <img src={image} alt={title} className="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {principles.map((principle, index) => <PrincipleCard key={index} {...principle} />)}
+            </div>
         </div>
-        <div className="p-6">
-            <p className="text-sm text-blue-600 font-semibold mb-2">{category}</p>
-            <h3 className="text-lg font-bold text-gray-800 leading-snug group-hover:text-blue-700 transition-colors">{title}</h3>
-        </div>
-    </a>
+    </section>
 );
 
-const OurStories = () => {
-    const stories = [
-        { image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600', category: 'Service Design', title: 'The Art of Customer Journey Mapping: A Practical Guide', link: '#' },
-        { image: 'https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=600', category: 'User Experience', title: 'How Service Blueprints Can Revolutionize Your Business', link: '#' },
-        { image: 'https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=600', category: 'Case Study', title: 'Improving Customer Satisfaction by 40% through Service Design', link: '#' },
-    ];
-    return (
-        <section className="bg-gray-50 py-20">
-            <div className="container mx-auto px-4">
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">Our Stories</h2>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {stories.map((story, index) => <StoryCard key={index} {...story} /> )}
-                </div>
-                 <div className="text-center mt-12">
-                    <NavLink to="/blog" className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:underline">
-                        View All Posts <ArrowRight size={16} />
-                    </NavLink>
-                </div>
-            </div>
-        </section>
-    );
-};
-
-// --- নতুন: Testimonials Section ---
-const TestimonialCard = ({ quote, name, role, avatar }) => (
-    <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 h-full flex flex-col text-center">
-        <Quote className="w-12 h-12 text-blue-200 mx-auto mb-4" />
-        <blockquote className="text-gray-700 italic leading-relaxed flex-grow">"{quote}"</blockquote>
-        <div className="mt-6">
-            <img src={avatar} alt={name} className="w-16 h-16 rounded-full mx-auto mb-3 shadow-md" />
-            <cite className="font-bold text-gray-800 not-italic block">{name}</cite>
-            <span className="text-sm text-gray-500">{role}</span>
+// OurProcess
+const ProcessStep = ({ number, title, description }) => (
+    <div className="flex items-start gap-6">
+        <div className="flex-shrink-0 w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-xl">{number}</div>
+        <div>
+            <h3 className="text-xl font-bold text-gray-800">{title}</h3>
+            <p className="mt-2 text-gray-600">{description}</p>
         </div>
     </div>
 );
+const OurProcess = ({ steps = [] }) => (
+    <section className="bg-white py-24">
+        <div className="container mx-auto px-4">
+            <div className="text-center mb-16"><h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">Our Service Design Process</h2></div>
+            <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+                {steps.map((step, index) => <ProcessStep key={index} number={index + 1} {...step} />)}
+            </div>
+        </div>
+    </section>
+);
 
-const TestimonialsSection = () => {
-    const testimonials = [
-        { quote: "ZAAG's service design approach completely reshaped how we interact with our customers. The results were immediate and impactful.", name: "Emily Carter", role: "Head of Customer Experience, RetailCo", avatar: "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=600" },
-        { quote: "The journey mapping workshop was an eye-opener. We identified critical pain points we never knew existed. Their team is truly expert in this field.", name: "Michael Rodriguez", role: "COO, HealthFirst", avatar: "https://images.pexels.com/photos/842571/pexels-photo-842571.jpeg?auto=compress&cs=tinysrgb&w=600" },
-        { quote: "Their data-driven insights and collaborative process made us feel like a true partner. We now have a clear roadmap for improving our services.", name: "Samantha Lee", role: "Founder, EduTech Start-up", avatar: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=600" },
-    ];
-    return (
-        <section className="bg-white py-24">
-            <div className="container mx-auto px-4">
-                <div className="text-center mb-16 max-w-3xl mx-auto">
-                    <span className="text-blue-600 font-semibold uppercase tracking-wider">TESTIMONIALS</span>
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2">What Our Clients Say</h2>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {testimonials.map((testimonial, index) => <TestimonialCard key={index} {...testimonial} /> )}
-                </div>
+// Testimonial
+const Testimonial = ({ quote, name, role, avatar }) => (
+    <section className="bg-gray-50 py-24">
+        <div className="container mx-auto px-4 text-center max-w-4xl">
+            <Quote className="w-16 h-16 text-red-100 mx-auto mb-6" fill="currentColor"/>
+            <blockquote className="text-2xl font-medium text-gray-700 italic leading-relaxed">"{quote}"</blockquote>
+            <div className="mt-8">
+                <img src={avatar} alt={name} className="w-20 h-20 rounded-full mx-auto mb-3 shadow-md" />
+                <cite className="font-bold text-gray-800 not-italic block">{name}</cite>
+                <span className="text-sm text-gray-500">{role}</span>
+            </div>
+        </div>
+    </section>
+);
+
+// CTA Section
+const CtaSection = () => {
+    const { setIsContactPopupOpen } = useContext(AppContext);
+    return(
+        <section className="bg-white py-20">
+            <div className="container mx-auto px-4 text-center max-w-4xl">
+                <Puzzle className="w-16 h-16 text-red-500 mx-auto mb-6"/>
+                <h2 className="text-3xl font-extrabold text-gray-900">Ready to Reimagine Your Service?</h2>
+                <p className="mt-4 text-gray-600 text-lg">
+                   Let's collaborate to design services that create lasting value for your customers and your business. Schedule a free consultation with our experts.
+                </p>
+                <button 
+                    onClick={() => setIsContactPopupOpen(true)}
+                    className="mt-8 bg-red-600 text-white font-semibold px-8 py-3.5 rounded-full hover:bg-red-700 transition-transform transform hover:scale-105"
+                >
+                    Get a Free Consultation
+                </button>
             </div>
         </section>
     );
@@ -199,14 +111,50 @@ const TestimonialsSection = () => {
 
 // --- Main Page Component ---
 const ServiceDesign = () => {
+    // --- সার্ভিস ডিজাইনের জন্য কাস্টমাইজড ডেটা ---
+    const serviceDesignData = {
+        hero: {
+            title: "Strategic Service Design",
+            description: "We help you design, align, and optimize your services to create exceptional end-to-end customer experiences. It's about looking at the big picture to create seamless and valuable interactions at every touchpoint.",
+            image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        },
+        keyPrinciples: {
+            title: "The Core Principles of Our Service Design",
+            subtitle: "Our approach is built on a foundation of proven strategic principles.",
+            principles: [
+                { icon: <Users size={28} />, title: 'Human-Centered', description: 'We always start with the needs, motivations, and desires of the people you serve.' },
+                { icon: <Puzzle size={28} />, title: 'Holistic', description: 'We consider the entire ecosystem of your service, including all touchpoints, actors, and systems.' },
+                { icon: <Microscope size={28} />, title: 'Co-Creative', description: 'We believe in collaborating closely with your team and customers to generate the best ideas.' },
+                { icon: <CheckCircle size={28} />, title: 'Iterative', description: 'We prototype, test, and refine our solutions based on real-world feedback to ensure they are effective.' },
+                { icon: <Heart size={28} />, title: 'Value-Driven', description: 'Our goal is to create services that are not only desirable for customers but also viable for your business.' },
+                { icon: <Gem size={28} />, title: 'Evidence-Based', description: 'Our decisions are informed by qualitative and quantitative research, not just assumptions.' },
+            ]
+        },
+        process: {
+            steps: [
+                { title: 'Exploration & Research', description: 'We dive deep into your business and your customers\' world to uncover key insights and opportunities.' },
+                { title: 'Journey Mapping', description: 'Visualizing the end-to-end customer journey to identify pain points and moments that matter.' },
+                { title: 'Ideation & Prototyping', description: 'Co-creating innovative solutions and building low-fidelity prototypes to test our ideas quickly.' },
+                { title: 'Service Blueprinting', description: 'Mapping out the front-stage and back-stage processes required to deliver the new service experience.' },
+                { title: 'Testing & Refinement', description: 'Validating our solutions with real users and stakeholders to ensure they are effective and feasible.' },
+                { title: 'Implementation Support', description: 'Working alongside your team to bring the new service design to life and ensure a successful launch.' },
+            ]
+        },
+        testimonial: {
+            quote: "Tecnigo Team's service design process was an eye-opener. They helped us see our business from our customers' perspective and identified critical areas for improvement. The results have been transformative.",
+            name: "Laura Evans",
+            role: "Head of Customer Experience, RetailCo",
+            avatar: "https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=800"
+        }
+    };
+
     return (
         <div>
-            <ServiceDesignHero />
-            <WhatIsServiceDesign />
-            <OurApproach />
-            <WhyChooseUs />
-            <OurStories />          {/* <-- নতুন সেকশন যোগ করা হয়েছে */}
-            <TestimonialsSection /> {/* <-- নতুন সেকশন যোগ করা হয়েছে */}
+            <ServiceHero {...serviceDesignData.hero} />
+            <KeyPrinciples {...serviceDesignData.keyPrinciples} />
+            <OurProcess {...serviceDesignData.process} />
+            <Testimonial {...serviceDesignData.testimonial} />
+            <CtaSection />
         </div>
     );
 };

@@ -8,7 +8,6 @@ const ScrollToTopButton = () => {
 
     const handleScroll = () => {
         setIsVisible(window.scrollY > 300);
-
         const scrollTop = window.scrollY;
         const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
@@ -36,21 +35,22 @@ const ScrollToTopButton = () => {
             <div className="relative w-full h-full overflow-hidden rounded-full">
                 {/* The Wave Container */}
                 <div
-                    className="absolute bottom-0 left-0 w-full bg-red-500"
+                    className="absolute bottom-0 left-0 w-full"
                     style={{
-                        height: `calc(100% + 20px)`, // Extra height for the wave shape
+                        height: `calc(100% + 20px)`,
                         transform: `translateY(${waveHeight}%)`,
                         transition: 'transform 0.1s linear',
+                        // লাল রঙের জন্য ব্যাকগ্রাউন্ড পরিবর্তন
+                        backgroundColor: '#dc2626' // Tailwind red-600
                     }}
                 >
                     {/* SVG for the wave shape */}
                     <div className="absolute top-0 left-[-50%] w-[200%] h-5">
                         <svg viewBox="0 0 100 20" className="w-full h-full wave-animation" preserveAspectRatio="none">
-                            <path d="M0,10 C15,20 35,0 50,10 C65,20 85,0 100,10 L100,20 L0,20 Z" fill="#ec4899"></path>
+                            <path d="M0,10 C15,20 35,0 50,10 C65,20 85,0 100,10 L100,20 L0,20 Z" fill="#ef4444"></path> {/* Tailwind red-500 */}
                         </svg>
                     </div>
                 </div>
-
                 {/* Arrow Icon */}
                 <div className="absolute inset-0 flex items-center justify-center">
                     <ChevronUp className="w-8 h-8 text-white" />

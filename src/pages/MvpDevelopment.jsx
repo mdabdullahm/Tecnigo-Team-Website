@@ -1,252 +1,108 @@
 // src/pages/MvpDevelopment.jsx
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Users, Recycle, Building, UserCheck, Quote, ArrowRight } from 'lucide-react';
+import { CheckCircle, Gem, Rocket, Lightbulb, Quote, Users } from 'lucide-react';
+import { AppContext } from '../AppContext';
 
-// --- Hero Section (আগের মতোই) ---
-const MvpHero = () => (
-    <section className="bg-gradient-to-br from-blue-50 via-white to-purple-50 pt-32 pb-20 overflow-hidden">
-        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="text-center md:text-left animate-fade-in-up">
-                <h1 className="text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
-                    MVP Development Services
-                </h1>
-                <p className="mt-6 text-lg text-gray-600 max-w-lg mx-auto md:mx-0">
-                    The Lean Startup Methodology has radically transformed how new products are built. We leverage this approach in tandem with agile to deliver products that are delightful, useful, valuable and feasible from day one.
-                </p>
-                <NavLink 
-                    to="/contact"
-                    className="mt-8 inline-block bg-blue-600 text-white font-semibold px-8 py-4 rounded-full hover:bg-blue-700 transition-transform duration-300 transform hover:scale-105"
-                >
-                    Get Started Now
-                </NavLink>
+// --- পুনঃব্যবহারযোগ্য কম্পোনেন্টগুলো (আগের পেজগুলো থেকে নেওয়া) ---
+
+// ServiceHero
+const ServiceHero = ({ title, description, image }) => {
+    const { setIsContactPopupOpen } = useContext(AppContext);
+    return (
+        <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-black pt-32 pb-20 text-white overflow-hidden">
+            <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div className="text-center md:text-left animate-fade-in-up">
+                    <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight">{title}</h1>
+                    <p className="mt-6 text-lg text-gray-300 max-w-lg mx-auto md:mx-0">{description}</p>
+                    <button onClick={() => setIsContactPopupOpen(true)} className="mt-8 inline-block bg-red-600 text-white font-semibold px-8 py-4 rounded-full hover:bg-red-700 transition-transform duration-300 transform hover:scale-105">
+                        Build Your MVP
+                    </button>
+                </div>
+                <div className="flex justify-center md:justify-end">
+                    <img src={image} alt={title} className="w-full max-w-lg rounded-lg shadow-2xl" />
+                </div>
             </div>
-            <div className="flex justify-center">
-                <img 
-                    src="https://i.ibb.co/L5Bw0zV/mvp-hero.png" 
-                    alt="MVP Development Cycle" 
-                    className="max-w-lg w-full"
-                />
-            </div>
-        </div>
-    </section>
-);
+        </section>
+    );
+};
 
-// --- Introduction Section (আগের মতোই) ---
-const MvpIntro = () => (
-    <section className="bg-white py-20">
-        <div className="container mx-auto px-4 text-center max-w-4xl">
-            <h2 className="text-3xl font-bold text-gray-900">
-                Success of your product starts with a great MVP
-            </h2>
-            <p className="mt-6 text-gray-600 leading-relaxed text-lg">
-                A well-balanced MVP is the best way to explore the potential of your idea at the optimum cost and time. It has the right proportion of basic functionality and unique features to prove your product can stand out among its competitors. Using minimum viable product software, you show the investors your concept is worth looking into and can test your product on real audience before a big roll-out to the market.
-            </p>
-        </div>
-    </section>
-);
-
-// --- Services We Provide Section (আগের মতোই) ---
-const ServiceCard = ({ icon, title, description }) => (
+// KeyFeatures
+const FeatureCard = ({ icon, title, description }) => (
     <div className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 h-full">
-        <div className="text-blue-600 mb-5">
-            {icon}
-        </div>
+        <div className="inline-block bg-red-50 text-red-600 p-4 rounded-full mb-5">{icon}</div>
         <h3 className="text-xl font-bold text-gray-800 mb-3">{title}</h3>
         <p className="text-gray-600 leading-relaxed">{description}</p>
     </div>
 );
-
-const MvpServices = () => {
-    const services = [
-        {
-            icon: <Users size={32} />,
-            title: 'Customer-Centered Nature',
-            description: 'Our experienced team of developers works diligently to deliver your MVP within a short timeframe, ensuring you can quickly test and iterate your product concept.'
-        },
-        {
-            icon: <Recycle size={32} />,
-            title: 'Agile & Lean Methodologies',
-            description: 'We follow an agile development methodology, allowing us to adapt to changing requirements, prioritize features, and deliver incremental releases to gather valuable user feedback.'
-        },
-        {
-            icon: <Building size={32} />,
-            title: 'Business-Oriented Approach',
-            description: 'Our expert designers create intuitive and user-friendly interfaces for your MVP, focusing on delivering an exceptional user experience that resonates with your target audience.'
-        },
-        {
-            icon: <UserCheck size={32} />,
-            title: 'Managed MVP Teams',
-            description: 'Our MVP solutions are built with scalability in mind, ensuring that your product can grow and evolve as your business expands. We also provide flexible engagement models to suit your project needs.'
-        },
-    ];
-
-    return (
-        <section className="bg-gray-50 py-20">
-            <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
-                    <div className="lg:col-span-1">
-                        <h2 className="text-3xl font-extrabold text-gray-900 mb-4">MVP development services we provide</h2>
-                        <div className="w-24 h-1.5 bg-blue-600 rounded-full"></div>
-                        <img src="https://i.ibb.co/h7gBq41/mvp-side.png" alt="Abstract pyramid" className="mt-8 rounded-lg shadow-md w-full" />
-                    </div>
-                    <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {services.map((service, index) => (
-                            <ServiceCard key={index} {...service} />
-                        ))}
-                    </div>
-                </div>
+const KeyFeatures = ({ title, subtitle, features = [] }) => (
+    <section className="bg-gray-50 py-20">
+        <div className="container mx-auto px-4">
+            <div className="text-center mb-16 max-w-3xl mx-auto">
+                <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2">{title}</h2>
+                <p className="text-gray-600 mt-4 text-lg">{subtitle}</p>
             </div>
-        </section>
-    );
-};
-
-
-// --- Why ZAAG Section (আগের মতোই) ---
-const WhyZaag = () => {
-    const points = [
-        { number: '01', title: 'Agile Methodology', description: 'We use Agile throughout an MVP’s development to enhance and assure the desired outcomes. Agile ensures quicker, less stressful client outcomes.' },
-        { number: '02', title: 'Dedicated Project Manager', description: 'We tackle business difficulties with the finest team and clear communication. Our remote-first, well-built procedure assigns a project manager for each project to assure quality.' },
-        { number: '03', title: '80% Employee Retention Rate', description: 'Our retention rate is 80%. Investing in a great workforce has helped us accomplish more and offer exceptional outcomes to every customer.' },
-        { number: '04', title: '9/10 Client Satisfaction Score', description: 'We not only write code and develop products, but our honest communication helps us satisfy customers. Our high service standards guarantee all-out customer satisfaction.' },
-        { number: '05', title: '92% Senior and Middle Engineers', description: 'Our pool of tech-savvy professionals with distinctive abilities and aptitudes allows us to provide clients with senior tech talent to create world-class software.' },
-        { number: '06', title: 'Risk Handling', description: 'Technical growth is risky; therefore, we’ve improved our protocols, tools, and risk-management strategies. As a result, we prioritize client satisfaction and exceed expectations.' },
-    ];
-
-    return (
-        <section className="bg-white py-24">
-            <div className="container mx-auto px-4">
-                <div className="text-center mb-16 max-w-3xl mx-auto">
-                    <span className="text-blue-600 font-semibold uppercase tracking-wider">WHY ZAAG?</span>
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2">
-                        Why ZAAG Systems for MVP Development?
-                    </h2>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-                    {points.map(point => (
-                        <div key={point.number}>
-                            <div className="flex items-center gap-4 mb-3">
-                                <span className="text-gray-300 font-bold text-2xl">{point.number}</span>
-                                <div className="flex-grow h-px bg-gray-200"></div>
-                            </div>
-                            <h3 className="text-xl font-bold text-gray-800 mb-2">{point.title}</h3>
-                            <p className="text-gray-600">{point.description}</p>
-                        </div>
-                    ))}
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {features.map((feature, index) => <FeatureCard key={index} {...feature} />)}
             </div>
-        </section>
-    );
-};
-
-// --- নতুন: Our Stories / Blog Section ---
-const StoryCard = ({ image, category, title, link }) => (
-    <a href={link} className="group block bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-        <div className="overflow-hidden">
-            <img src={image} alt={title} className="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-300" />
         </div>
-        <div className="p-6">
-            <p className="text-sm text-blue-600 font-semibold mb-2">{category}</p>
-            <h3 className="text-lg font-bold text-gray-800 leading-snug group-hover:text-blue-700 transition-colors">{title}</h3>
-        </div>
-    </a>
+    </section>
 );
 
-const OurStories = () => {
-    const stories = [
-        {
-            image: 'https://images.pexels.com/photos/5926393/pexels-photo-5926393.jpeg?auto=compress&cs=tinysrgb&w=600',
-            category: 'MVP Development',
-            title: 'How to Build an MVP: A Step-by-Step Guide for Startups',
-            link: '#',
-        },
-        {
-            image: 'https://images.pexels.com/photos/3184423/pexels-photo-3184423.jpeg?auto=compress&cs=tinysrgb&w=600',
-            category: 'Startup Strategy',
-            title: 'Top 5 Mistakes to Avoid When Launching Your First Product',
-            link: '#',
-        },
-        {
-            image: 'https://images.pexels.com/photos/6476587/pexels-photo-6476587.jpeg?auto=compress&cs=tinysrgb&w=600',
-            category: 'Agile Methodology',
-            title: 'Why Agile is the Perfect Fit for MVP Development Projects',
-            link: '#',
-        },
-    ];
-
-    return (
-        <section className="bg-gray-50 py-20">
-            <div className="container mx-auto px-4">
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">Our Stories</h2>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {stories.map((story, index) => (
-                        <StoryCard key={index} {...story} />
-                    ))}
-                </div>
-                <div className="text-center mt-12">
-                    <NavLink to="/blog" className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:underline">
-                        View All Posts <ArrowRight size={16} />
-                    </NavLink>
-                </div>
-            </div>
-        </section>
-    );
-};
-
-// --- নতুন: Testimonials Section ---
-const TestimonialCard = ({ quote, name, role, avatar }) => (
-    <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 h-full flex flex-col text-center">
-        <Quote className="w-12 h-12 text-blue-200 mx-auto mb-4" />
-        <blockquote className="text-gray-700 italic leading-relaxed flex-grow">
-            "{quote}"
-        </blockquote>
-        <div className="mt-6">
-            <img src={avatar} alt={name} className="w-16 h-16 rounded-full mx-auto mb-3 shadow-md" />
-            <cite className="font-bold text-gray-800 not-italic block">{name}</cite>
-            <span className="text-sm text-gray-500">{role}</span>
+// OurProcess
+const ProcessStep = ({ number, title, description }) => (
+    <div className="flex items-start gap-6">
+        <div className="flex-shrink-0 w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-xl">{number}</div>
+        <div>
+            <h3 className="text-xl font-bold text-gray-800">{title}</h3>
+            <p className="mt-2 text-gray-600">{description}</p>
         </div>
     </div>
 );
+const OurProcess = ({ steps = [] }) => (
+    <section className="bg-white py-24">
+        <div className="container mx-auto px-4">
+            <div className="text-center mb-16"><h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">Our MVP Development Process</h2></div>
+            <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+                {steps.map((step, index) => <ProcessStep key={index} number={index + 1} {...step} />)}
+            </div>
+        </div>
+    </section>
+);
 
-const TestimonialsSection = () => {
-    const testimonials = [
-        {
-            quote: "ZAAG's MVP development service was a game-changer for our startup. They helped us validate our idea quickly and efficiently, saving us valuable time and resources.",
-            name: "Alex Johnson",
-            role: "Founder, TechLaunch",
-            avatar: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        },
-        {
-            quote: "The team's agile approach was perfect for our project. They delivered a high-quality MVP that allowed us to secure our first round of funding. Highly recommended!",
-            name: "Maria Garcia",
-            role: "CEO, Innovate Solutions",
-            avatar: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        },
-        {
-            quote: "Working with ZAAG was a fantastic experience. They understood our business goals and built an MVP that perfectly matched our vision and user needs.",
-            name: "Chen Wei",
-            role: "Co-Founder, MarketFit",
-            avatar: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        }
-    ];
+// Testimonial
+const Testimonial = ({ quote, name, role, avatar }) => (
+    <section className="bg-gray-50 py-24">
+        <div className="container mx-auto px-4 text-center max-w-4xl">
+            <Quote className="w-16 h-16 text-red-100 mx-auto mb-6" fill="currentColor"/>
+            <blockquote className="text-2xl font-medium text-gray-700 italic leading-relaxed">"{quote}"</blockquote>
+            <div className="mt-8">
+                <img src={avatar} alt={name} className="w-20 h-20 rounded-full mx-auto mb-3 shadow-md" />
+                <cite className="font-bold text-gray-800 not-italic block">{name}</cite>
+                <span className="text-sm text-gray-500">{role}</span>
+            </div>
+        </div>
+    </section>
+);
 
-    return (
-        <section className="bg-white py-24">
-            <div className="container mx-auto px-4">
-                <div className="text-center mb-16 max-w-3xl mx-auto">
-                    <span className="text-blue-600 font-semibold uppercase tracking-wider">TESTIMONIALS</span>
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2">
-                        What Our Clients Say
-                    </h2>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {testimonials.map((testimonial, index) => (
-                        <TestimonialCard key={index} {...testimonial} />
-                    ))}
-                </div>
+// CTA Section
+const CtaSection = () => {
+    const { setIsContactPopupOpen } = useContext(AppContext);
+    return(
+        <section className="bg-white py-20">
+            <div className="container mx-auto px-4 text-center max-w-4xl">
+                <Gem className="w-16 h-16 text-red-500 mx-auto mb-6"/>
+                <h2 className="text-3xl font-extrabold text-gray-900">Ready to Validate Your Idea?</h2>
+                <p className="mt-4 text-gray-600 text-lg">
+                    Let's discuss how we can build a Minimum Viable Product that tests your concept, gathers user feedback, and sets you up for success.
+                </p>
+                <button 
+                    onClick={() => setIsContactPopupOpen(true)}
+                    className="mt-8 bg-red-600 text-white font-semibold px-8 py-3.5 rounded-full hover:bg-red-700 transition-transform transform hover:scale-105"
+                >
+                    Get a Free MVP Consultation
+                </button>
             </div>
         </section>
     );
@@ -255,14 +111,50 @@ const TestimonialsSection = () => {
 
 // --- Main Page Component ---
 const MvpDevelopment = () => {
+    // --- MVP ডেভেলপমেন্টের জন্য কাস্টমাইজড ডেটা ---
+    const mvpData = {
+        hero: {
+            title: "MVP Development Services",
+            description: "Turn your innovative idea into a functional product, fast. Our MVP development service helps you validate your concept, gather user feedback, and launch to the market with minimum risk and investment.",
+            image: "https://images.pexels.com/photos/5926389/pexels-photo-5926389.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        },
+        keyFeatures: {
+            title: "Our Approach to MVP Development",
+            subtitle: "We focus on a lean, agile process to deliver value quickly.",
+            features: [
+                { icon: <Lightbulb size={28} />, title: 'Idea Validation', description: 'We help you test your core business idea with a real product in the hands of actual users.' },
+                { icon: <Gem size={28} />, title: 'Core Feature Focus', description: 'We identify and build the essential features that solve a key problem for your target audience.' },
+                { icon: <Rocket size={28} />, title: 'Speed to Market', description: 'Our agile process ensures rapid development cycles, allowing you to launch and learn in weeks, not months.' },
+                { icon: <Users size={28} />, title: 'User Feedback Loop', description: 'An MVP is the perfect tool to gather crucial user feedback to guide future development.' },
+                { icon: <CheckCircle size={28} />, title: 'Cost-Effective', description: 'Avoid overspending on unnecessary features by building only what you need to prove your concept.' },
+                { icon: <Users size={28} />, title: 'Investor-Ready', description: 'A successful MVP can be a powerful tool to attract and secure investment for your startup.' },
+            ]
+        },
+        process: {
+            steps: [
+                { title: 'Discovery & Strategy', description: 'We define the core problem, identify the target audience, and map out the essential features.' },
+                { title: 'Prototyping & Design', description: 'Creating a simple, intuitive design and prototype that focuses on the core user journey.' },
+                { title: 'Agile Development Sprints', description: 'Building the core features in short, iterative cycles for maximum flexibility and speed.' },
+                { title: 'Testing & QA', description: 'Ensuring the core functionalities are stable, secure, and ready for launch.' },
+                { title: 'Launch & Learn', description: 'Deploying the MVP to the market and setting up tools to gather critical user data and feedback.' },
+                { title: 'Iterate & Scale', description: 'Using the insights gathered to plan the next phase of development and scale the product.' },
+            ]
+        },
+        testimonial: {
+            quote: "Tecnigo Team's MVP service was a game-changer for our startup. They helped us validate our idea quickly and efficiently, which was crucial for securing our first round of funding. Highly recommended!",
+            name: "Maria Garcia",
+            role: "CEO, Innovate Solutions",
+            avatar: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800"
+        }
+    };
+
     return (
         <div>
-            <MvpHero />
-            <MvpIntro />
-            <MvpServices />
-            <WhyZaag />
-            <OurStories />          {/* <-- নতুন সেকশন যোগ করা হয়েছে */}
-            <TestimonialsSection /> {/* <-- নতুন সেকশন যোগ করা হয়েছে */}
+            <ServiceHero {...mvpData.hero} />
+            <KeyFeatures {...mvpData.keyFeatures} />
+            <OurProcess {...mvpData.process} />
+            <Testimonial {...mvpData.testimonial} />
+            <CtaSection />
         </div>
     );
 };

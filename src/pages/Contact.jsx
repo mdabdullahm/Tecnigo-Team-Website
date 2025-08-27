@@ -1,8 +1,10 @@
 // src/pages/Contact.jsx
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AppContext } from '../AppContext';
+import { Mail, Phone, MapPin, Copy } from 'lucide-react';
 
-// Input Field Component
+// Input Field Component (অপরিবর্তিত)
 const FormInput = ({ label, type = 'text', name, placeholder, required = false }) => (
     <div>
         <label htmlFor={name} className="block text-sm font-semibold text-gray-700 mb-2">
@@ -14,12 +16,12 @@ const FormInput = ({ label, type = 'text', name, placeholder, required = false }
             name={name}
             placeholder={placeholder}
             required={required}
-            className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+            className="block w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-colors"
         />
     </div>
 );
 
-// TextArea Component
+// TextArea Component (অপরিবর্তিত)
 const FormTextarea = ({ label, name, placeholder, required = false }) => (
     <div>
         <label htmlFor={name} className="block text-sm font-semibold text-gray-700 mb-2">
@@ -31,51 +33,91 @@ const FormTextarea = ({ label, name, placeholder, required = false }) => (
             rows="5"
             placeholder={placeholder}
             required={required}
-            className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+            className="block w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-colors"
         />
     </div>
 );
 
-
 const Contact = () => {
-    const [activeService, setActiveService] = useState('Hire Staff');
+    const { setIsCalendlyOpen } = useContext(AppContext);
+    const [activeService, setActiveService] = useState('Software Development');
 
-    const services = ['Hire Staff', 'Software Development', 'Mobile Application', 'Experience Design'];
+    const services = ['Software Development', 'Mobile App', 'UI/UX Design', 'Hire Staff'];
+    
+    const copyToClipboard = (text) => {
+        navigator.clipboard.writeText(text);
+        alert('Email copied to clipboard!');
+    };
 
     return (
-        <section className="bg-white min-h-screen">
-            <div className="grid grid-cols-1 lg:grid-cols-2">
-                {/* Left Side: Image */}
-                <div className="hidden lg:block h-screen sticky top-0">
-                    <img 
-                        src="https://images.pexels.com/photos/3184423/pexels-photo-3184423.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-                        alt="Modern office building"
-                        className="w-full h-full object-cover"
-                    />
-                </div>
+        <section className="bg-white min-h-screen pt-24">
+            <div className="container mx-auto px-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                    
+                    {/* --- সমাধান: এই div-এ pb-16 ক্লাস যোগ করা হয়েছে --- */}
+                    <div className="lg:sticky top-28 pb-16">
+                        <div className="text-center lg:text-left">
+                            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+                                Get in Touch
+                            </h1>
+                            <p className="mt-4 text-lg text-gray-600">
+                                We'd love to hear from you! Whether you have a question about our services, pricing, or anything else, our team is ready to answer all your questions.
+                            </p>
+                        </div>
+                        
+                        <div className="mt-12 space-y-6">
+                            <div className="flex items-center gap-4">
+                                <Mail className="w-8 h-8 text-red-600" />
+                                <div>
+                                    <h3 className="font-semibold text-gray-800">Email Us</h3>
+                                    <button onClick={() => copyToClipboard('contact@tecnigoteam.com')} className="text-gray-600 hover:text-red-600 flex items-center gap-2">
+                                        contact@tecnigoteam.com <Copy size={14}/>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <Phone className="w-8 h-8 text-red-600" />
+                                <div>
+                                    <h3 className="font-semibold text-gray-800">Call Us</h3>
+                                    <a href="tel:+15551234567" className="text-gray-600 hover:text-red-600">+1 (555) 123-4567</a>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <MapPin className="w-8 h-8 text-red-600" />
+                                <div>
+                                    <h3 className="font-semibold text-gray-800">Visit Us</h3>
+                                    <p className="text-gray-600">123 Tech Avenue, Silicon Valley, CA</p>
+                                </div>
+                            </div>
+                        </div>
 
-                {/* Right Side: Form */}
-                <div className="py-16 px-6 sm:px-12 lg:px-16">
-                    <div className="max-w-xl mx-auto">
-                        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
-                            How can we help you?
-                        </h2>
-                        <p className="mt-4 text-gray-600">
-                            You can reach us anytime via <a href="mailto:business@zaagsys.com" className="font-semibold text-blue-600 hover:underline">business@zaagsys.com</a>
-                        </p>
+                        <div className="mt-12 pt-8 border-t border-gray-200">
+                             <h3 className="text-xl font-bold text-gray-800">Schedule a Meeting</h3>
+                             <p className="mt-2 text-gray-600">Prefer a face-to-face (virtual) chat? Book a free 30-minute consultation call with us.</p>
+                             <button 
+                                onClick={() => setIsCalendlyOpen(true)}
+                                className="mt-4 bg-red-600 text-white font-semibold px-6 py-3 rounded-full hover:bg-red-700 transition-colors"
+                             >
+                                Book an Appointment
+                             </button>
+                        </div>
+                    </div>
 
-                        <form className="mt-12 space-y-8">
-                            <div>
-                                <div className="flex flex-wrap gap-4">
+                    {/* Right Side: Form (অপরিবর্তিত) */}
+                    <div className="bg-white p-8 rounded-2xl shadow-2xl border border-gray-100 mb-16">
+                        <form className="space-y-8">
+                             <div>
+                                <label className="block text-sm font-semibold text-gray-700 mb-3">I'm interested in...</label>
+                                <div className="flex flex-wrap gap-3">
                                     {services.map(service => (
                                         <button
                                             key={service}
                                             type="button"
                                             onClick={() => setActiveService(service)}
-                                            className={`px-6 py-3 rounded-full font-semibold text-sm transition-all duration-300 ${
+                                            className={`px-5 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 ${
                                                 activeService === service 
-                                                ? 'bg-blue-600 text-white shadow-lg' 
-                                                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-100'
+                                                ? 'bg-red-600 text-white shadow-md' 
+                                                : 'bg-white text-gray-600 border border-gray-300 hover:bg-gray-100'
                                             }`}
                                         >
                                             {service}
@@ -84,31 +126,14 @@ const Contact = () => {
                                 </div>
                             </div>
                             
-                            <FormInput label="Name" name="name" placeholder="Write your name" required />
-                            <FormInput label="Email" type="email" name="email" placeholder="Write your email" required />
-                            
-                            {/* Phone Number with Country Code */}
-                            <div>
-                                <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                                    Phone Number <span className="text-red-500">*</span>
-                                </label>
-                                <div className="flex">
-                                    <select className="px-4 py-3 border border-r-0 border-gray-300 rounded-l-lg bg-gray-50 focus:outline-none">
-                                        <option>BD +880</option>
-                                        <option>US +1</option>
-                                        <option>UK +44</option>
-                                    </select>
-                                    <input type="tel" id="phone" name="phone" placeholder="Write you number" required className="block w-full px-4 py-3 border border-gray-300 rounded-r-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
-                                </div>
-                            </div>
-
-                            <FormInput label="Company" name="company" placeholder="Your company name" />
-                            <FormInput label="Number of staff required" type="number" name="staff_count" placeholder="Number of stuff required" />
-                            <FormTextarea label="How can we help you?" name="message" placeholder="Start typing here" required />
+                            <FormInput label="Full Name" name="name" placeholder="John Doe" required />
+                            <FormInput label="Email" type="email" name="email" placeholder="you@example.com" required />
+                            <FormInput label="Company Name" name="company" placeholder="Your Company Inc." />
+                            <FormTextarea label="Tell us about your project" name="message" placeholder="What are you looking to build?" required />
 
                             <div>
-                                <button type="submit" className="w-full bg-blue-600 text-white font-bold px-8 py-4 rounded-full hover:bg-blue-700 transition-transform duration-300 transform hover:scale-105">
-                                    Submit & Schedule Meeting
+                                <button type="submit" className="w-full bg-gray-900 text-white font-bold px-8 py-4 rounded-full hover:bg-black transition-transform duration-300 transform hover:scale-105">
+                                    Send Message
                                 </button>
                             </div>
                         </form>

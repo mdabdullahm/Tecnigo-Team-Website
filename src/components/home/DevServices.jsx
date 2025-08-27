@@ -1,75 +1,59 @@
+// src/components/home/DevServices.jsx
+
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Server, AppWindow, PencilRuler, TestTube2, Code, Briefcase, ShieldCheck, Users } from 'lucide-react';
+import { Code, AppWindow, PencilRuler, Server, ShieldCheck, Briefcase } from 'lucide-react';
 
-// প্রতিটি সার্ভিসের জন্য সঠিক path যোগ করা হয়েছে
+// আপনার এজেন্সির প্রধান সেবাগুলো এখানে যোগ করুন
 const services = [
   { 
-    icon: <Search size={32} className="text-blue-500" />, 
-    title: 'User Research', 
-    description: 'Understand user behavior to build effective, user-centered solutions.',
-    path: '/services/user-research'
-  },
-  { 
-    icon: <Server size={32} className="text-green-500" />, 
-    title: 'Back-End Service', 
-    description: 'Create intuitive, visually appealing interfaces for better user experiences.',
-    path: '/services/hire-back-end-developers'
-  },
-  { 
-    icon: <AppWindow size={32} className="text-purple-500" />, 
-    title: 'Mobile App Dev', 
-    description: 'Build robust, scalable server-side systems powering your applications.',
-    path: '/services/mobile-app-development'
-  },
-  { 
-    icon: <PencilRuler size={32} className="text-orange-500" />, 
-    title: 'UX/UI Design', 
-    description: 'End-to-end web solutions tailored for performance and flexibility.',
-    path: '/services/ui-ux-design'
-  },
-  { 
-    icon: <TestTube2 size={32} className="text-red-500" />, 
-    title: 'SQA', 
-    description: 'Develop mobile apps aligned with your business goals and users.',
-    path: '/services/hire-sqa-engineers'
-  },
-  { 
-    icon: <Code size={32} className="text-sky-500" />, 
-    title: 'Web Development', 
-    description: 'Launch lean, functional products to validate ideas quickly.',
+    icon: <Code size={32} className="text-red-500" />, 
+    title: 'Custom Web Development', 
+    description: 'We build high-performing, scalable, and secure web applications tailored to your specific business needs.',
     path: '/services/web-development'
   },
   { 
-    icon: <Briefcase size={32} className="text-indigo-500" />, 
-    title: 'MVP Development', 
-    description: 'Ensure software reliability through rigorous testing and quality control.',
+    icon: <AppWindow size={32} className="text-red-500" />, 
+    title: 'Mobile App Development', 
+    description: 'Engage your users with intuitive and powerful mobile applications for both iOS and Android platforms.',
+    path: '/services/mobile-app-development'
+  },
+  { 
+    icon: <PencilRuler size={32} className="text-red-500" />, 
+    title: 'UI/UX Design', 
+    description: 'Our design experts create beautiful, user-centric interfaces that deliver exceptional user experiences.',
+    path: '/services/ui-ux-design'
+  },
+  { 
+    icon: <Server size={32} className="text-red-500" />, 
+    title: 'Backend & API Development', 
+    description: 'Power your digital products with robust, scalable, and secure server-side logic and APIs.',
+    path: '/services/hire-back-end-developers'
+  },
+  { 
+    icon: <ShieldCheck size={32} className="text-red-500" />, 
+    title: 'Cyber Security Solutions', 
+    description: 'Protect your digital assets and ensure business continuity with our comprehensive security services.',
+    path: '/services/cyber-security'
+  },
+  { 
+    icon: <Briefcase size={32} className="text-red-500" />, 
+    title: 'MVP & Prototyping', 
+    description: 'Validate your business idea quickly and efficiently by building a Minimum Viable Product with core functionalities.',
     path: '/services/mvp-development'
-  },
-  { 
-    icon: <ShieldCheck size={32} className="text-rose-500" />, 
-    title: 'Cyber Security', 
-    description: 'Protect your digital assets with proactive security measures.',
-    path: '/services/cyber-security' // <-- Cyber Security পেজের লিঙ্ক
-  },
-  { 
-    icon: <Users size={32} className="text-teal-500" />, 
-    title: 'Team Augmentation',
-    description: 'Scale your team with skilled professionals on demand.',
-    path: '/services/hire-front-end-developers'
   },
 ];
 
-// ServiceCard কম্পোনেন্ট Link দিয়ে র‍্যাপ করা হয়েছে
+// Service Card Component
 const ServiceCard = ({ icon, title, description, path }) => (
-  <Link to={path} className="block h-full">
-    <div className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg hover:-translate-y-2 transition-all duration-300 border border-gray-100 flex flex-col items-start h-full">
-      <div className="bg-gray-100 p-4 rounded-full mb-5">
+  <Link to={path} className="block group h-full">
+    <div className="bg-white p-8 rounded-2xl shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 flex flex-col items-start h-full">
+      <div className="bg-red-50 p-4 rounded-full mb-5">
         {icon}
       </div>
       <h3 className="text-xl font-bold text-gray-800 mb-2">{title}</h3>
       <p className="text-gray-500 text-base mb-5 flex-grow">{description}</p>
-      <span className="font-semibold text-blue-600 hover:text-blue-800 transition-colors mt-auto">
+      <span className="font-semibold text-red-600 group-hover:text-red-800 transition-colors mt-auto">
         Learn more →
       </span>
     </div>
@@ -78,14 +62,14 @@ const ServiceCard = ({ icon, title, description, path }) => (
 
 const DevServices = () => {
   return (
-    <section className="bg-gray-50 py-20">
+    <section className="bg-white py-24">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12 max-w-3xl mx-auto">
+        <div className="text-center mb-16 max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
-            Custom Software Development Services
+            Our Core Services
           </h2>
-          <p className="text-gray-600 mt-4 text-lg">
-            Custom software development services designed to enhance efficiency, streamline operations, and drive your business forward.
+          <p className="text-gray-600 mt-4 text-lg leading-relaxed">
+            We provide a wide range of digital services designed to help your business succeed in the modern landscape.
           </p>
         </div>
         
