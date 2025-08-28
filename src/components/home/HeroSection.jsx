@@ -6,19 +6,19 @@ import { Code, AppWindow, PencilRuler, ArrowRight } from 'lucide-react';
 
 const HeroSection = () => {
   return (
-    // --- মূল সেকশন কন্টেইনার ---
-    <section className="relative h-screen min-h-[700px] flex flex-col justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-red-900 text-white overflow-hidden">
+    // --- সমাধান: h-screen সরানো হয়েছে এবং প্যাডিং ব্যবহার করা হয়েছে ---
+    <section className="relative flex flex-col justify-between bg-gradient-to-br from-gray-900 via-gray-800 to-red-900 text-white overflow-hidden" style={{ minHeight: 'calc(100vh - 80px)' }}>
       
-      {/* --- ডেকোরেটিভ শেপ --- */}
+      {/* ডেকোরেটিভ শেপ */}
       <div className="absolute top-0 left-0 w-full h-full opacity-10">
         <div className="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-red-500 rounded-full filter blur-3xl"></div>
         <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-white rounded-full filter blur-3xl"></div>
       </div>
       
-      {/* --- সমাধান: মূল কনটেন্ট এবং নিচের সেকশন আলাদা করা হয়েছে --- */}
-      <div className="w-full flex-grow flex flex-col justify-center items-center">
-        {/* --- উপরের কনটেন্ট (শিরোনাম, বাটন ইত্যাদি) --- */}
-        <div className="relative z-10 container mx-auto px-4 text-center animate-fade-in-up">
+      {/* --- উপরের কনটেন্ট (শিরোনাম, বাটন ইত্যাদি) --- */}
+      {/* সমাধান: py-20 প্যাডিং যোগ করা হয়েছে */}
+      <div className="relative z-10 container mx-auto px-4 flex flex-col justify-center items-center text-center flex-grow py-20">
+        <div className="animate-fade-in-up">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight drop-shadow-lg">
               Creative Solutions, 
               <br />
