@@ -272,3 +272,29 @@ html, body {
 .animate-progress-bar {
   animation: progress-bar-animation 8s linear infinite;
 }
+
+
+
+
+
+/* src/index.css */
+/* ... ফাইলের উপরের অংশ অপরিবর্তিত ... */
+
+/* --- Swiper Slider Pagination Styles (এটি প্রতিস্থাপন করুন) --- */
+/* পুরাতন .swiper-custom-pagination স্টাইলটি ডিলিট করে দিন */
+
+/* Case Studies Slider Pagination Styles (Red Theme) */
+.case-studies-pagination .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background-color: #9ca3af; /* Inactive dot color - gray-400 */
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.case-studies-pagination .swiper-pagination-bullet-active {
+  opacity: 1;
+  width: 30px;
+  border-radius: 8px;
+  background-color: #ef4444; /* Active dot color - red-500 */
+}
