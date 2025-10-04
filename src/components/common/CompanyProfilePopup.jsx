@@ -1,6 +1,3 @@
-// src/components/common/CompanyProfilePopup.jsx
-
-import React from 'react';
 import { FiX } from 'react-icons/fi';
 
 const CompanyProfilePopup = ({ isOpen, onClose }) => {
@@ -8,17 +5,15 @@ const CompanyProfilePopup = ({ isOpen, onClose }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // এখানে ফর্ম সাবমিট করার লজিক যোগ করা যেতে পারে
-        // যেমন: API তে ডেটা পাঠানো
         alert('Thank you for your interest! We will get back to you shortly.');
-        onClose(); // ফর্ম সাবমিট হওয়ার পর পপ-আপ বন্ধ করে দেওয়া
+        onClose(); 
     };
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[999]" onClick={onClose}>
             <div 
                 className="bg-white rounded-xl shadow-2xl w-full max-w-md p-8 m-4 relative animate-fade-in-up" 
-                onClick={(e) => e.stopPropagation()} // পপ-আপের ভেতরে ক্লিক করলে যেন বন্ধ না হয়
+                onClick={(e) => e.stopPropagation()} 
             >
                 <button
                     onClick={onClose}

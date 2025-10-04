@@ -1,5 +1,3 @@
-// src/components/common/ContactPopup.jsx
-
 import React, { useState } from 'react';
 import { FiX } from 'react-icons/fi';
 

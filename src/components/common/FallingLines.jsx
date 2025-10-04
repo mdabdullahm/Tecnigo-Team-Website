@@ -1,4 +1,3 @@
-// src/components/common/FallingLines.jsx
 import React, { useState, useEffect } from 'react';
 
 const FallingLines = () => {
@@ -8,8 +7,8 @@ const FallingLines = () => {
         const interval = setInterval(() => {
             const newLine = {
                 id: Date.now() + Math.random(),
-                left: Math.random() * 100, // Random horizontal position (0% to 100%)
-                animationDuration: Math.random() * 1 + 1.5, // Random duration (1.5s to 2.5s)
+                left: Math.random() * 100, 
+                animationDuration: Math.random() * 1 + 1.5, 
             };
 
             setLines(prevLines => [...prevLines, newLine]);

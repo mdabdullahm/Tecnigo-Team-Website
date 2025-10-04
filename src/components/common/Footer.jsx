@@ -1,6 +1,3 @@
-// src/components/common/Footer.jsx
-
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaLinkedinIn, FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { ArrowRight } from 'lucide-react';
@@ -10,12 +7,11 @@ const Footer = () => {
     <footer className="bg-gray-900 text-gray-300">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-10">
         
-        {/* --- উপরের অংশ: লিঙ্ক এবং সাবস্ক্রিপশন --- */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           
           {/* Column 1: About */}
           <div className="md:col-span-2 lg:col-span-1">
-            <h3 className="text-2xl font-bold text-white mb-4">Tecnigo Team</h3>
+            <h3 className="text-2xl font-bold text-white mb-4">NexCore</h3>
             <p className="text-sm max-w-sm leading-relaxed">
               Your strategic partner in crafting innovative digital solutions that drive growth and deliver exceptional user experiences.
             </p>
@@ -77,10 +73,9 @@ const Footer = () => {
 
         </div>
         
-        {/* --- নিচের অংশ: Copyright --- */}
         <div className="mt-12 pt-8 border-t border-gray-800 text-center">
             <p className="text-sm text-gray-500">
-            © {new Date().getFullYear()} Tecnigo Team. All Rights Reserved.
+            © {new Date().getFullYear()} NexCore. All Rights Reserved.
             </p>
         </div>
 

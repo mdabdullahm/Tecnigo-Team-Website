@@ -1,6 +1,3 @@
-// src/components/common/CalendlyPopup.jsx
-
-import React from 'react';
 import { InlineWidget } from 'react-calendly';
 import { FiX } from 'react-icons/fi';
 
@@ -12,7 +9,6 @@ const CalendlyPopup = ({ isOpen, onClose }) => {
             className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[999] p-4"
             onClick={onClose}
         >
-            {/* --- সমাধান: এখানে h-[75vh] ক্লাস যোগ করা হয়েছে --- */}
             <div 
                 className="bg-white rounded-lg shadow-2xl w-full max-w-4xl h-full sm:h-[75vh] max-h-[90vh] relative animate-fade-in flex flex-col"
                 onClick={(e) => e.stopPropagation()}
@@ -26,7 +22,7 @@ const CalendlyPopup = ({ isOpen, onClose }) => {
 
                 <div className="flex-grow overflow-hidden rounded-lg">
                     <InlineWidget 
-                        url="https://calendly.com/zaagsys/30min" // <-- আপনার Calendly লিঙ্ক
+                        url="https://calendly.com/zaagsys/30min" 
                         styles={{ height: '100%', width: '100%' }}
                     />
                 </div>

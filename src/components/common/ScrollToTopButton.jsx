@@ -1,4 +1,3 @@
-// src/components/common/ScrollToTopButton.jsx
 import React, { useState, useEffect } from 'react';
 import { ChevronUp } from 'lucide-react';
 
@@ -40,8 +39,7 @@ const ScrollToTopButton = () => {
                         height: `calc(100% + 20px)`,
                         transform: `translateY(${waveHeight}%)`,
                         transition: 'transform 0.1s linear',
-                        // লাল রঙের জন্য ব্যাকগ্রাউন্ড পরিবর্তন
-                        backgroundColor: '#dc2626' // Tailwind red-600
+                        backgroundColor: '#dc2626' 
                     }}
                 >
                     {/* SVG for the wave shape */}
